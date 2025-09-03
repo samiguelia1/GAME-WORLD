@@ -7,7 +7,7 @@ function Games(){
   const [isLoading, setIsLoading] = useState(false);
   const [gameName, setGameName] = useState("");
   const [games, setGames] = useState([]);
-  const API_KEY = "7c5bd555b7f440e18222800e942e7335";
+  const API_KEY = "5fb7eda2d0ba415c8470730f5b1e56d5";
   const [page, setPage] = useState(1);
 
   const fetchGames = useCallback(async (link) => {
@@ -21,13 +21,13 @@ function Games(){
       console.log(error)
     } finally {
       setIsLoading(false);
-    }
+    } 
   }, []);
 
   useEffect(() => {
     const URL_PAGE = `https://api.rawg.io/api/games?key=${API_KEY}&page=${page}&page_size=20`;
     fetchGames(URL_PAGE);
-  }, [page, fetchGames]);
+  }, [page,fetchGames]);
 
   function SerachForGame(e){
     if((e.type === "keydown" && e.key==="Enter") || e.type==="click" ){
@@ -46,7 +46,7 @@ function Games(){
   return(
     <div>
       <nav className="flex items-center sticky top-0 z-50  bg-[#2e2e2e0d] py-5 backdrop-blur-sm  mt-5 ">
-        <img src="public/logo.svg" className="sm:mx-10 mx-2 h-[45px] cursor-pointer" alt="" />
+        <Link to={"/"}><img src="public/logo.svg" className="sm:mx-10 mx-2 h-[45px] cursor-pointer" alt="" /></Link>
         <div className="w-screen">
           <i onClick={SerachForGame} className="cursor-pointer fas fa-search text-white relative left-8"></i>
           <input onChange={setgamename} onKeyDown={SerachForGame} type="text" placeholder="Searh for a game..." className="input" />
@@ -67,7 +67,7 @@ function Games(){
             {games.map((game, index) => (
              
               <LazyLoadComponent key={game?.id} threshold={0.8} >
-              <link  className=" game-card flex flex-col my-5 overflow-hidden text-white w-1/1 sm:w-1/4 lg:w-1/6 hover:scale-110 lg:ml-8 sm:ml-15 rounded-lg pb-2 cursor-pointer duration-300 hover:bg-[#515050] bg-[#2e2e2e]">              
+              <Link to={`/games/${game?.id}`} className=" game-card flex flex-col my-5 overflow-hidden text-white w-1/1 sm:w-1/4 lg:w-1/6 hover:scale-110 lg:ml-8 sm:ml-15 rounded-lg pb-2 cursor-pointer duration-300 hover:bg-[#515050] bg-[#2e2e2e]">              
                 <LazyLoadImage effect="blur" delayTime={3000} threshold={0.8} role="Game Img" className="lg:h-32 h-[310px] w-[100%] sm:h-25"  src={game?.background_image}></LazyLoadImage>
                 <p className="text-xl mx-2 mt-2 max-w-[100%] font-bold text-shadow-lg/20 text-shadow-black">{game?.name}</p>
                 <div className="flex items-center mt-5 sm:justify-around mx-2">
@@ -81,7 +81,7 @@ function Games(){
                     {game?.released?.split("-")[0]}
                   </p>
                 </div>
-              </link>
+              </Link>
                </LazyLoadComponent>
             ))}
           </ul> 

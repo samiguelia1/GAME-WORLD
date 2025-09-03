@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+@import 'react-lazy-load-image-component/src/effects/blur.css';
+.btn-class{
+    @apply rounded-xl px-5 py-2 cursor-pointer hover:scale-110 duration-300 bg-cyan-950 text-cyan-300 m-5;
+}
+.h1-class{
+    @apply text-2xl font-bold text-center py-2;
+}
+body{
+    background-color: #121212;
+
+}
+.input{
+    @apply bg-[#46494a] h-12 sm:w-[70%] mx-0 w-[90%] rounded-4xl px-10 duration-200 placeholder:text-[#ffffffa4]  hover:bg-[#818181] focus:bg-[#818181] placeholder:font-mono placeholder:font-semibold font-semibold focus:outline-0 text-gray-800 font-serif ;
+}

@@ -1,6 +1,6 @@
-import { useCallback, useEffect,  useState } from "react";
+import React, { useCallback, useEffect,  useState } from "react";
 import { LazyLoadComponent, LazyLoadImage } from "react-lazy-load-image-component";
-
+import { Link } from "react-router-dom";
 function Games(){ 
 
   const [hasDataFetched, setHasDataFetched] = useState(false); 
@@ -45,7 +45,7 @@ function Games(){
 
   return(
     <div>
-      <nav className="flex mt-10 items-center">
+      <nav className="flex items-center sticky top-0 z-50  bg-[#2e2e2e0d] py-5 backdrop-blur-sm  mt-5 ">
         <img src="public/logo.svg" className="sm:mx-10 mx-2 h-[45px] cursor-pointer" alt="" />
         <div className="w-screen">
           <i onClick={SerachForGame} className="cursor-pointer fas fa-search text-white relative left-8"></i>
@@ -65,8 +65,9 @@ function Games(){
         ) : (
           <ul  className=" sm:flex flex-wrap grid sm:flex-row">
             {games.map((game, index) => (
+             
               <LazyLoadComponent key={game?.id} threshold={0.8} >
-              <div  className=" game-card flex flex-col my-5 overflow-hidden text-white w-1/1 sm:w-1/4 lg:w-1/6 hover:scale-110 lg:ml-8 sm:ml-15 rounded-lg pb-2 cursor-pointer duration-300 hover:bg-[#515050] bg-[#2e2e2e]">              
+              <link  className=" game-card flex flex-col my-5 overflow-hidden text-white w-1/1 sm:w-1/4 lg:w-1/6 hover:scale-110 lg:ml-8 sm:ml-15 rounded-lg pb-2 cursor-pointer duration-300 hover:bg-[#515050] bg-[#2e2e2e]">              
                 <LazyLoadImage effect="blur" delayTime={3000} threshold={0.8} role="Game Img" className="lg:h-32 h-[310px] w-[100%] sm:h-25"  src={game?.background_image}></LazyLoadImage>
                 <p className="text-xl mx-2 mt-2 max-w-[100%] font-bold text-shadow-lg/20 text-shadow-black">{game?.name}</p>
                 <div className="flex items-center mt-5 sm:justify-around mx-2">
@@ -80,7 +81,7 @@ function Games(){
                     {game?.released?.split("-")[0]}
                   </p>
                 </div>
-              </div>
+              </link>
                </LazyLoadComponent>
             ))}
           </ul> 

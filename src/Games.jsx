@@ -1,12 +1,7 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { useCallback, useEffect,  useState } from "react";
+import { LazyLoadComponent, LazyLoadImage } from "react-lazy-load-image-component";
 
 function Games(){ 
-  gsap.registerPlugin(ScrollTrigger);
-  const cardsContainerRef = useRef(null);
 
   const [hasDataFetched, setHasDataFetched] = useState(false); 
   const [isLoading, setIsLoading] = useState(false);
@@ -48,23 +43,6 @@ function Games(){
     setGameName(e.target.value);
   }
 
-  useGSAP(() => {
-    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    if(cardsContainerRef.current){
-      const cards = cardsContainerRef.current.querySelectorAll(".game-card");
-      cards.forEach((card) => {
-        gsap.from(card, {
-          opacity:0,
-          duration:0.7 ,  
-          scrollTrigger: {
-            trigger: card,
-            start: "top 85%",
-          }
-        });
-      });
-    }
-  }, [games]);
-
   return(
     <div>
       <nav className="flex mt-10 items-center">
@@ -85,10 +63,11 @@ function Games(){
             <img src="public/loading.svg" className="lg:h-[40%] h-[20%] sm:30%" alt="" />
           </div>
         ) : (
-          <ul ref={cardsContainerRef} className="  sm:flex flex-wrap grid sm:flex-row">
+          <ul  className=" sm:flex flex-wrap grid sm:flex-row">
             {games.map((game, index) => (
-              <div key={game?.id} className=" game-card flex flex-col my-5 overflow-hidden text-white w-1/1 sm:w-1/4 lg:w-1/6 hover:scale-110 lg:ml-8 sm:ml-15 rounded-lg pb-2 cursor-pointer duration-300 hover:bg-[#515050] bg-[#2e2e2e]">
-                <LazyLoadImage effect="blur" threshold={0.8} role="img" className="lg:h-32 h-[310px] w-[100%] sm:h-25" delayTime={2000} src={game?.background_image}></LazyLoadImage>
+              <LazyLoadComponent key={game?.id} threshold={0.8} >
+              <div  className=" game-card flex flex-col my-5 overflow-hidden text-white w-1/1 sm:w-1/4 lg:w-1/6 hover:scale-110 lg:ml-8 sm:ml-15 rounded-lg pb-2 cursor-pointer duration-300 hover:bg-[#515050] bg-[#2e2e2e]">              
+                <LazyLoadImage effect="blur" delayTime={3000} threshold={0.8} role="Game Img" className="lg:h-32 h-[310px] w-[100%] sm:h-25"  src={game?.background_image}></LazyLoadImage>
                 <p className="text-xl mx-2 mt-2 max-w-[100%] font-bold text-shadow-lg/20 text-shadow-black">{game?.name}</p>
                 <div className="flex items-center mt-5 sm:justify-around mx-2">
                   <p className={`text-[13px] font-semibold ${game?.ratings?.[0]?.title === "exceptional" ? "text-[#ff4d00]" : "text-[#0fd20fd2]"} ${game?.ratings?.[0]?.title == "exceptional" ? "fas fa-fire" : "fas fa-thumbs-up"}`}></p>
@@ -102,6 +81,7 @@ function Games(){
                   </p>
                 </div>
               </div>
+               </LazyLoadComponent>
             ))}
           </ul> 
         )

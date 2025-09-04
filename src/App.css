@@ -17,3 +17,6 @@ body{
 .logo{
     @apply h-[16px] mx-0.5 cursor-pointer;
 }
+.trailer{
+    @apply rounded-md cursor-pointer  ;
+}

@@ -68,7 +68,7 @@ function Games(){
              
               <LazyLoadComponent key={game?.id} threshold={0.8} >
               <Link to={`/games/${game?.id}`} className=" game-card flex flex-col my-5 overflow-hidden text-white w-1/1 sm:w-1/4 lg:w-1/6 hover:scale-110 lg:ml-8 sm:ml-15 rounded-lg pb-2 cursor-pointer duration-300 hover:bg-[#515050] bg-[#2e2e2e]">              
-                <LazyLoadImage effect="blur" delayTime={3000} threshold={0.8} role="Game Img" className="lg:h-32 h-[310px] w-[100%] sm:h-25"  src={game?.background_image}></LazyLoadImage>
+                <LazyLoadImage effect="blur" delayTime={3000} threshold={0.8} role="Game Img" className="  object-cover w-full h-full sm:h-25"  src={game?.background_image}></LazyLoadImage>
                 <p className="text-xl mx-2 mt-2 max-w-[100%] font-bold text-shadow-lg/20 text-shadow-black">{game?.name}</p>
                 <div className="flex items-center mt-5 sm:justify-around mx-2">
                   <p className={`text-[13px] font-semibold ${game?.ratings?.[0]?.title === "exceptional" ? "text-[#ff4d00]" : "text-[#0fd20fd2]"} ${game?.ratings?.[0]?.title == "exceptional" ? "fas fa-fire" : "fas fa-thumbs-up"}`}></p>

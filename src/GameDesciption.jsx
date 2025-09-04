@@ -21,6 +21,7 @@ function GameDesciption() {
                 released: data.released,
                 playtime: data.playtime,
                 rating: data.rating,
+                background_image_additional: data.background_image_additional,
                 DescriptionRating: data.playing < 3 ? "Meh" : data.playing > 3 && data.playing < 4 ? "Good" : "Exceptional",
                 download: data.added,
               }
@@ -45,7 +46,7 @@ function GameDesciption() {
     <LazyLoadComponent   threshold={0.95}>
 
       <div
-        className="min-h-screen bg-cover  flex felx-col bg-center bg-no-repeat "
+        className="min-h-screen bg-cover   flex felx-col bg-center bg-no-repeat "
         style={{
           backgroundImage: `radial-gradient(circle,rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(${GameDesciption?.background_image})`,
         }}
@@ -57,11 +58,9 @@ function GameDesciption() {
                 <input type="text" placeholder="Searh for a game..." className="input " />
               </div>
             </nav>
-        <div className=' flex flex-col lg:flex-row  w-[100%] absolute top-1/5 lg:text-left lg:pl-35 sm:pl-5 text-center  '>
-         <div>
+      <div className=' flex flex-col lg:flex-row   lg:justify-start w-[100%] absolute top-1/5 lg:text-left  sm:px-37 text-center  '>
 
-         </div>
-          <div>
+          <div className=' lg:w-1/2   '>
             <p className=' cursor-pointer font-mono text-[#ffffff6a] mb-7 text-[12px] '>HOME / GAMES /  {  GameDesciption?.name.toUpperCase()}</p>
           <div className='flex justify-center lg:justify-start space-x-1 mb-7 items-center '>
                 <p className='bg-white text-[12px] lg:text-[14px] rounded-sm  px-1.5 font-mono mr-3 '>{GameDesciption?.released}</p>
@@ -70,7 +69,7 @@ function GameDesciption() {
                 <LazyLoadImage effect='blur' className='logo' src='/play-station.png ' ></LazyLoadImage>
                 <p className=' mx-2 text-[13px]  text-white'>AVERAGE PLAYTIME: {GameDesciption?.playtime} HOURES</p>
           </div>
-                 <h1 className="font-['Audiowide'] lg:text-6xl text-5xl font-bold lg:max-w-[65%] text-white ">
+                 <h1 className="font-['Audiowide'] lg:text-6xl text-5xl font-bold lg:max-w-1/1  text-white ">
              {GameDesciption?.name}
                  </h1>
                  <div className='flex my-7 lg:ml-0 space-x-5 justify-center lg:justify-start'>
@@ -83,7 +82,19 @@ function GameDesciption() {
                     <p className='text-white text-2xl font-semibold '> {GameDesciption?.DescriptionRating} <span className='border-l-1 py-2 ml-2 mr-3 opacity-40'></span> <span>{GameDesciption?.rating} <span className='fas fa-star text-[22px]'></span> </span> <span className='border-l-1 py-2 ml-2 mr-3 opacity-40'></span> <span>{GameDesciption?.download} <span className='fas fa-download'></span></span> </p>
                  </div>
           </div>
-        </div>
+           <div className='  lg:w-[30%] lg:ml-15 inline-flex flex-col  items-center '>
+            <LazyLoadImage effect='blur' className='lg:w-[100%] lg:h-40 rounded-md '  src={GameDesciption?.background_image} />
+            <div className='flex h-full mt-5 space-x-2 '>
+              <LazyLoadImage effect='blur' className='trailer' src={GameDesciption?.background_image_additional} />
+              <LazyLoadImage effect='blur' className='trailer' src={GameDesciption?.background_image_additional} />
+            </div>
+              <div className='flex h-full mt-5 space-x-2 '>
+              <LazyLoadImage effect='blur' className='trailer' src={GameDesciption?.background_image_additional} />
+              <LazyLoadImage effect='blur' className='rounded-md cursor-pointer bg-amber-200 backdrop-blur-2xl ' src={GameDesciption?.background_image_additional} />
+            </div>
+            
+         </div>
+      </div>
 
       </div>
       

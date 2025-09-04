@@ -45,14 +45,14 @@ function Games(){
 
   return(
     <div>
-      <nav className="flex items-center sticky top-0 z-50  bg-[#2e2e2e0d] py-5 backdrop-blur-sm  mt-5 ">
-        <Link to={"/"}><img src="public/logo.svg" className="sm:mx-10 mx-2 h-[45px] cursor-pointer" alt="" /></Link>
+      <nav className="flex items-center sticky top-0 z-50  bg-[#2e2e2e0d] py-5 backdrop-blur-sm   ">
+        <Link to={"/"}><img src="public/logo.svg" className="sm:mx-10  h-[45px] cursor-pointer" alt="" /></Link>
         <div className="w-screen">
           <i onClick={SerachForGame} className="cursor-pointer fas fa-search text-white relative left-8"></i>
           <input onChange={setgamename} onKeyDown={SerachForGame} type="text" placeholder="Searh for a game..." className="input" />
         </div>
       </nav>
-      <div className="w-screen flex justify-center mt-5">
+      <div className="w-screen flex justify-center">
         <img src="public/prev.png" onClick={ () => page === 1 ? setPage(page) : setPage(page-1)} className={`${page == 1 ? "opacity-30" : "opacity-100"} cursor-pointer hover:bg-[#343434] duration-300 rounded-full mx-3 h-[40px] w-[40px]`} alt="" />
         <img src="public/next.png" onClick={ () => setPage(page+1)} className="cursor-pointer hover:bg-[#343434] duration-300 rounded-full mx-3 h-[40px] w-[40px]" alt="" />
       </div>

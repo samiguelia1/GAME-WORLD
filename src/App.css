@@ -12,5 +12,8 @@ body{
 
 }
 .input{
-    @apply bg-[#46494a] h-12 sm:w-[70%] mx-0 w-[90%] rounded-4xl px-10 duration-200 placeholder:text-[#ffffffa4]  hover:bg-[#818181] focus:bg-[#818181] placeholder:font-mono placeholder:font-semibold font-semibold focus:outline-0 text-gray-800 font-serif ;
+    @apply bg-[#46494a00] h-12 sm:w-[70%] border-2 border-[#8080808e] mx-0 w-[90%] rounded-4xl px-10 duration-200 placeholder:text-[#ffffffc5]  hover:bg-[#575555e4] focus:text-[white] focus:bg-[#575555e4] placeholder:font-mono placeholder:font-semibold font-semibold focus:outline-0 text-gray-800 font-serif ;
+}
+.logo{
+    @apply h-[16px] mx-0.5 cursor-pointer;
 }

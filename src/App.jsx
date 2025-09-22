@@ -4,10 +4,12 @@ function App(){
   return(
     <>
     < Games />
+    <>
+    </>
     </>
   )
 
 }
 
-export default App;//this is the sa;dk;alksd
+export default App;
   

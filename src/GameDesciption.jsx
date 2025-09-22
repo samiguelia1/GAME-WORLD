@@ -46,7 +46,7 @@ function GameDesciption() {
           setIsLoading(false);
         }
     }, [id]);
-
+//test
     useEffect(() => {
         fetchGames();
     }, [fetchGames]);

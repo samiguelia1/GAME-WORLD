@@ -38,6 +38,7 @@ function GameDesciption() {
               steam: storesData.results?.[0]?.url,
               xbox: storesData.results?.[3]?.url,
               playstation: storesData.results?.[1]?.url,
+              epic: storesData.results?.[2]?.url
             }
           });
         } catch (error) {

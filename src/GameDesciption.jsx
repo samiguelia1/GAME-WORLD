@@ -21,7 +21,7 @@ function GameDesciption() {
           
           const [data, storesData] = await Promise.all([
             gameResponse.json(),
-            storesResponse.json()
+            storesResponse.json(),
           ]);
           
           setGameDesciption({
@@ -46,17 +46,18 @@ function GameDesciption() {
           setIsLoading(false);
         }
     }, [id]);
-//test
+
     useEffect(() => {
         fetchGames();
     }, [fetchGames]);
 
-    // Memoize background image style
-    const backgroundStyle = useMemo(() => ({
-        backgroundImage: `radial-gradient(circle,rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(${GameDesciption?.background_image})`
-    }), [GameDesciption?.background_image]);
 
-    // Memoize like button handler
+    // Removed background image gradient for performance
+    const backgroundStyle = useMemo(() => ({
+        // Simple dark background without effects
+    }), []);
+
+   
     const handleLikeClick = useCallback(() => {
         setHasliked(prev => !prev);
     }, []);
@@ -64,65 +65,152 @@ function GameDesciption() {
   <>
   {
   isLoading ? (
-    <div className="min-h-screen flex items-center justify-center bg-[#151515]">
+    <div className="min-h-screen flex items-center justify-center bg-black">
       <img src="/loading.svg" className="h-20" alt="Loading..." />
     </div>
   ) : (
-    <LazyLoadComponent   threshold={0.95}>
+    <div className="min-h-screen bg-[#1e222b3c] relative">
 
-      <div
-        className="min-h-screen bg-cover flex felx-col bg-center bg-no-repeat"
-        style={backgroundStyle}
-      >
-               <nav className="flex pl-2 items-center fixed top-0 z-50 rounded-b-2xl bg-transparent py-5 backdrop-blur-sm">
-              <Link to={"/"}><img src="/logo.svg" className="sm:mx-10 h-[45px] cursor-pointer" alt="" /></Link>
-              <div className="w-screen">
-                <i  className="cursor-pointer fas fa-search text-white relative left-8"></i>
-                <input type="text" placeholder="Searh for a game..." className="input " />
-              </div>
-            </nav>
-      <div className='flex flex-col w-[100%] absolute top-1/5 text-center sm:px-37'>
-
-          <div className='w-full'>
-            <p className=' cursor-pointer font-mono text-[#ffffff6a] mb-7 text-[12px] '>HOME / GAMES /  {  GameDesciption?.name.toUpperCase()}</p>
-          <div className='flex justify-center space-x-1 mb-7 items-center'>
-                <p className='bg-white text-[12px] rounded-sm px-1.5 font-mono mr-3'>{GameDesciption?.released}</p>
-                
-                <a href={GameDesciption?.gameURl?.steam} target="_blank" rel="noopener noreferrer" title="Download on Steam">
-                  <LazyLoadImage effect='blur' className='logo cursor-pointer hover:opacity-80 transition-opacity' src='/steam.png' />
-                </a>
-                
-                <a href={GameDesciption?.gameURl?.xbox} target="_blank" rel="noopener noreferrer" title="Download on Xbox Store">
-                  <LazyLoadImage effect='blur' className='logo cursor-pointer hover:opacity-80 transition-opacity' src='/xbox.png' />
-                </a>
-                
-                <a href={GameDesciption?.gameURl?.playstation} target="_blank" rel="noopener noreferrer" title="Download on PlayStation Store">
-                  <LazyLoadImage effect='blur' className='h-[22px] mx-0.5 cursor-pointer hover:scale-120 ' src='/play-station.png' />
-                </a>
-                
-                <p className=' mx-2 text-[13px]  text-white'>AVERAGE PLAYTIME: {GameDesciption?.playtime} HOURES</p>
-          </div>
-                 <h1 className="font-['Audiowide'] text-5xl font-bold text-white">
-             {GameDesciption?.name}
-                 </h1>
-                 <div className='flex my-7 space-x-5 justify-center'>
-
-                   <button className='text-white text-[15px] cursor-pointer font-mono border-[1px] px-5  py-3 rounded-lg hover:bg-white hover:text-black duration-300'>Add to My game  </button>
-                   <button onClick={handleLikeClick} className='text-white text-[15px] cursor-pointer font-mono border-[1px] px-5  py-3 rounded-lg hover:bg-white hover:text-black duration-300'>LIKE <span className='text-[18px] top-[1.5px] relative'>{hasliked ? "❤": ""}</span> </button>
-                 </div>
-                  <div className='flex my-7 space-x-5 justify-center'>
-
-                    <p className='text-white text-2xl font-semibold '> {GameDesciption?.DescriptionRating} <span className='border-l-1 py-2 ml-2 mr-3 opacity-40'></span> <span>{GameDesciption?.rating?.toFixed(1)} <span className='fas fa-star text-[22px]'></span> </span> <span className='border-l-1 py-2 ml-2 mr-3 opacity-40'></span> <span>{GameDesciption?.download} <span className='fas fa-download'></span></span> </p>
-                 </div>
-          </div>
-          
-    
-
-      </div>
-
-      </div>
       
-    </LazyLoadComponent>
+     
+
+     
+      <nav className="sticky top-2 mx-4 z-50 bg-white/10 backdrop-blur-3xl border border-white/20 rounded-2xl shadow-2xl shadow-black/20">
+        <div className="flex items-center justify-between px-6 py-4">
+          <Link to={"/"} className="flex items-center">
+            <img src="/logo.svg" className="h-10 cursor-pointer hover:scale-105 transition-transform" alt="Logo" />
+          </Link>
+          <div className="flex-1 max-w-md mx-8">
+            <div className="relative">
+              <i className="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-white/70 text-sm"></i>
+              <input 
+                type="text" 
+                placeholder="Search . . ." 
+                className="w-full pl-12 pr-4 py-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/40 transition-all duration-300"
+              />
+            </div>
+          </div>
+          <div className="w-10"></div>
+        </div>
+      </nav>
+
+      
+      <div className="relative z-10 px-4 sm:px-6 lg:px-8 py-8">
+        <div className="max-w-7xl mx-auto">
+          
+          
+          <div className="mb-8">
+            <p className="text-gray-400 text-sm font-mono">
+              HOME / GAMES / {GameDesciption?.name?.toUpperCase()}
+            </p>
+          </div>
+
+         
+          <div className="grid grid-cols-1 xl:grid-cols-5 gap-8 mb-8">
+            
+            
+            <div className="xl:col-span-3">
+              <div className="bg-[#22252b] border-2 border-gray-600/50 hover:border-gray-500/80 rounded-3xl overflow-hidden shadow-lg transition-all duration-300">
+                <LazyLoadImage
+                  src={GameDesciption?.background_image}
+                  alt={GameDesciption?.name}
+                  className="w-full h-64 sm:h-80 lg:h-96 xl:h-[500px] object-cover"
+                  effect="blur"
+                />
+              </div>
+            </div>
+
+           
+            <div className="xl:col-span-2 space-y-6">
+              
+              
+              <div className="bg-[#22252b] border-2 border-gray-600/50 hover:border-gray-500/80 rounded-3xl p-6 shadow-lg transition-all duration-300">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
+                  {GameDesciption?.name}
+                </h1>
+                
+                <div className="flex items-center space-x-4 mb-6">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-3xl font-bold text-white">{GameDesciption?.rating?.toFixed(1)}</span>
+                    <i className="fas fa-star text-yellow-400 text-xl"></i>
+                  </div>
+                  <span className="bg-green-700 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                    {GameDesciption?.DescriptionRating}
+                  </span>
+                  <span className="text-gray-300 text-sm">{GameDesciption?.download} downloads</span>
+                </div>
+
+               
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                  <div className="bg-black/30 backdrop-blur-sm rounded-xl p-3">
+                    <p className="text-gray-400 text-xs uppercase tracking-wide">Released</p>
+                    <p className="text-white font-semibold">{GameDesciption?.released}</p>
+                  </div>
+                  <div className="bg-black/30 backdrop-blur-sm rounded-xl p-3">
+                    <p className="text-gray-400 text-xs uppercase tracking-wide">Playtime</p>
+                    <p className="text-white font-semibold">{GameDesciption?.playtime} hours</p>
+                  </div>
+                </div>
+
+                
+                <div className="mb-6">
+                  <h3 className="text-white font-semibold mb-3">Available on</h3>
+                  <div className="flex flex-wrap gap-3">
+                    {GameDesciption?.gameURl?.steam && (
+                      <a href={GameDesciption.gameURl.steam} target="_blank" rel="noopener noreferrer" 
+                         className="bg-blue-700 hover:bg-blue-800 px-4 py-2 rounded-xl flex items-center space-x-2">
+                        <LazyLoadImage effect='blur' src='/steam.png' className="h-5" alt="Steam" />
+                        <span className="text-white font-medium">Steam</span>
+                      </a>
+                    )}
+                    {GameDesciption?.gameURl?.xbox && (
+                      <a href={GameDesciption.gameURl.xbox} target="_blank" rel="noopener noreferrer"
+                         className="bg-green-700 hover:bg-green-800 px-4 py-2 rounded-xl flex items-center space-x-2">
+                        <LazyLoadImage effect='blur' src='/xbox.png' className="h-5" alt="Xbox" />
+                        <span className="text-white font-medium">Xbox</span>
+                      </a>
+                    )}
+                    {GameDesciption?.gameURl?.playstation && (
+                      <a href={GameDesciption.gameURl.playstation} target="_blank" rel="noopener noreferrer"
+                         className="bg-blue-900 hover:bg-blue-950 px-4 py-2 rounded-xl flex items-center space-x-2">
+                        <LazyLoadImage effect='blur' src='/play-station.png' className="h-5" alt="PlayStation" />
+                        <span className="text-white font-medium">PlayStation</span>
+                      </a>
+                    )}
+                  </div>
+                </div>
+
+                
+                <div className="space-y-3">
+                  <button className="w-full bg-slate-700 hover:bg-slate-800 text-white py-4 px-6 rounded-xl font-semibold shadow-lg">
+                    Add to My Games
+                  </button>
+                  <button 
+                    onClick={handleLikeClick}
+                    className={`w-full py-4 px-6 rounded-xl font-semibold shadow-lg ${
+                      hasliked 
+                        ? 'bg-red-700/70 backdrop-blur-sm hover:bg-red-800/70 text-white' 
+                        : 'bg-black/30 hover:bg-black/50 backdrop-blur-sm border border-white/10 text-white'
+                    }`}
+                  >
+                    {hasliked ? '❤️ Loved' : '🤍 Add to Wishlist'}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+          <div className="bg-[#22252b] border-2 border-gray-600/50 hover:border-gray-500/80 rounded-3xl p-8 shadow-lg transition-all duration-300">
+            <h2 className="text-2xl font-bold text-white mb-6">About this game</h2>
+            <div 
+              className="text-gray-300 leading-relaxed prose prose-lg prose-invert max-w-none"
+              dangerouslySetInnerHTML={{ __html: GameDesciption?.description }}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   )
   }
   </>

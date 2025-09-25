@@ -13,7 +13,6 @@ function GameDesciption() {
         try {
           setIsLoading(true);
           
-          // Use Promise.all for parallel API calls
           const [gameResponse, storesResponse] = await Promise.all([
             fetch(`https://api.rawg.io/api/games/${id}?key=5fb7eda2d0ba415c8470730f5b1e56d5`),
             fetch(`https://api.rawg.io/api/games/${id}/stores?key=5fb7eda2d0ba415c8470730f5b1e56d5`)
@@ -52,9 +51,8 @@ function GameDesciption() {
     }, [fetchGames]);
 
 
-    // Removed background image gradient for performance
     const backgroundStyle = useMemo(() => ({
-        // Simple dark background without effects
+        
     }), []);
 
    
@@ -71,10 +69,6 @@ function GameDesciption() {
   ) : (
     <div className="min-h-screen bg-[#1e222b3c] relative">
 
-      
-     
-
-     
       <nav className="sticky top-2 mx-4 z-50 bg-white/10 backdrop-blur-3xl border border-white/20 rounded-2xl shadow-2xl shadow-black/20">
         <div className="flex items-center justify-between px-6 py-4">
           <Link to={"/"} className="flex items-center">
@@ -97,18 +91,22 @@ function GameDesciption() {
       
       <div className="relative z-10 px-4 sm:px-6 lg:px-8 py-8">
         <div className="max-w-7xl mx-auto">
-          
-          
-          <div className="mb-8">
-            <p className="text-gray-400 text-sm font-mono">
-              HOME / GAMES / {GameDesciption?.name?.toUpperCase()}
-            </p>
+          <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between">
+            <div>
+              <p className="text-gray-400 text-sm font-mono mb-2 sm:mb-0">
+                HOME / GAMES / {GameDesciption?.name?.toUpperCase()}
+              </p>
+            </div>
+            
+            <Link to="/"
+              className="bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 px-4 py-2 rounded-xl text-white transition-all duration-300 flex items-center w-fit mt-3 sm:mt-0 group"
+            >
+              <i className="fas fa-home mr-2 group-hover:scale-110 transition-transform"></i>
+              <span className="text-sm sm:text-base">Back to Home</span>
+            </Link>
           </div>
 
-         
           <div className="grid grid-cols-1 xl:grid-cols-5 gap-8 mb-8">
-            
-            
             <div className="xl:col-span-3">
               <div className="bg-[#22252b] border-2 border-gray-600/50 hover:border-gray-500/80 rounded-3xl overflow-hidden shadow-lg transition-all duration-300">
                 <LazyLoadImage
@@ -118,12 +116,22 @@ function GameDesciption() {
                   effect="blur"
                 />
               </div>
+              
+              <Link 
+                to={`/games/${id}/screenshots`}
+                className="mt-4 bg-white/15 backdrop-blur-xl border border-white/30 rounded-3xl h-[100px] w-full overflow-hidden cursor-pointer flex flex-col items-center justify-center shadow-lg transition-all duration-300 hover:bg-white/20 hover:border-white/40"
+              >
+                <div className="flex space-x-2 mb-3">
+                  <div className="w-2 h-2 rounded-full bg-white/90 animate-pulse"></div>
+                  <div className="w-2 h-2 rounded-full bg-white/90 animate-pulse delay-100"></div>
+                  <div className="w-2 h-2 rounded-full bg-white/90 animate-pulse delay-200"></div>
+                </div>
+                <span className="text-white text-sm font-medium tracking-wide">VIEW ALL SCREENSHOTS</span>
+              </Link>
             </div>
 
            
             <div className="xl:col-span-2 space-y-6">
-              
-              
               <div className="bg-[#22252b] border-2 border-gray-600/50 hover:border-gray-500/80 rounded-3xl p-6 shadow-lg transition-all duration-300">
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
                   {GameDesciption?.name}
